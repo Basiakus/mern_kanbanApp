@@ -10,7 +10,7 @@ export function addNote(req, res) {
   }
 
   const newNote = new Note({
-    task: note.task,
+    task: note.task
   });
 
   newNote.id = uuid();

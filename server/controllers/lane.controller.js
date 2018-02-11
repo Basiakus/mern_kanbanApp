@@ -15,15 +15,18 @@ export function addLane(req, res) {
     res.json(saved);
   });
 }
-export function renameLane(req, res) {
-  Lane.findOne({ id: req.params.laneId }).exec((err, lane) => {
-    if (err) {
+export function editLane(req, res) {
+  const lane = req.body;
+  if(!lane.id ) {
+    res.status(403).end();
+  }
+  Lane.findOneAndUpdate({id: lane.id}, lane, {new: true}, (err, edit) => {
+    if(err) {
       res.status(500).send(err);
     }
-    Lane.name = body.name;
-  });
+    res.json(edit);
+  })
 }
-
 export function deleteLane(req, res) {
   Lane.findOne({ id: req.params.laneId }).exec((err, lane) => {
     if (err) {
