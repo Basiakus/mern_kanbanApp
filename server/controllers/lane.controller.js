@@ -15,18 +15,7 @@ export function addLane(req, res) {
     res.json(saved);
   });
 }
-export function editLane(req, res) {
-  const lane = req.body;
-  if(!lane.id ) {
-    res.status(403).end();
-  }
-  Lane.findOneAndUpdate({id: lane.id}, lane, {new: true}, (err, edit) => {
-    if(err) {
-      res.status(500).send(err);
-    }
-    res.json(edit);
-  })
-}
+
 export function deleteLane(req, res) {
   Lane.findOne({ id: req.params.laneId }).exec((err, lane) => {
     if (err) {
@@ -44,5 +33,19 @@ export function getLanes(req, res) {
       res.status(500).send(err);
     }
     res.json({ lanes });
+  });
+}
+
+export function editLane(req, res) {
+  const lane = req.body;
+  if(!lane.id ) {
+    res.status(403).end();
+  }
+  
+  Lane.findOneAndUpdate({id: lane.id}, {name: lane.name}, (err, update) => {
+    if(err) {
+      res.status(500).send(err);
+    }
+     res.status(200).end();
   });
 }

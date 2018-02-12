@@ -7,8 +7,9 @@ const router = new Router();
 router.route('/lanes').post(LaneController.addLane);
 // Get all Lanes
 router.route('/lanes').get(LaneController.getLanes);
-router.route('/lanes').put(LaneController.editLane);
 // Delete a lane by laneId
 router.route('/lanes/:laneId').delete(LaneController.deleteLane);
+// edit lanes
+router.route('/lanes').put(LaneController.editLane);
 
 export default router;

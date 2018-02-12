@@ -47,3 +47,16 @@ export function deleteNote(req, res) {
     });
   });
 }
+export function editNote(req, res) {
+  const note = req.body;
+  if(!note.id ) {
+    res.status(403).end();
+  }
+  
+  Note.findOneAndUpdate({id: note.id}, {task: note.task}, (err, update) => {
+    if(err) {
+      res.status(500).send(err);
+    }
+     res.status(200).end();
+  });
+}
